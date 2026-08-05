@@ -79,9 +79,9 @@ export const DailyTaskLogger: React.FC = () => {
       <AdBanner slotPosition="top" />
 
       {/* Date Navigation & Actions Header */}
-      <div className="glass-panel p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Date Selector */}
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+      <div className="glass-panel p-4 rounded-2xl grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+        {/* Date Selector (Left) */}
+        <div className="flex items-center gap-2 justify-center md:justify-start w-full">
           <button
             onClick={handlePrevDay}
             className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
@@ -90,7 +90,7 @@ export const DailyTaskLogger: React.FC = () => {
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <div className="relative flex-1 sm:flex-none">
+          <div className="relative">
             <input
               type="date"
               value={selectedDate}
@@ -115,22 +115,24 @@ export const DailyTaskLogger: React.FC = () => {
           </button>
         </div>
 
-        {/* Date Display */}
-        <div className="text-center sm:text-left">
-          <h2 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-blue-500" />
+        {/* Date Display (Center - Perfectly centered on X axis) */}
+        <div className="flex items-center justify-center text-center">
+          <h2 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center justify-center gap-2">
+            <Calendar className="w-4 h-4 text-blue-500 shrink-0" />
             <span>{formatKoreanDate(selectedDate)}</span>
           </h2>
         </div>
 
-        {/* Add Task Button */}
-        <button
-          onClick={handleOpenAddModal}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl shadow-md transition-all transform active:scale-95"
-        >
-          <Plus className="w-4 h-4" />
-          <span>새 업무 기록 추가</span>
-        </button>
+        {/* Add Task Button (Right) */}
+        <div className="flex items-center justify-center md:justify-end">
+          <button
+            onClick={handleOpenAddModal}
+            className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl shadow-md transition-all transform active:scale-95"
+          >
+            <Plus className="w-4 h-4" />
+            <span>새 업무 기록 추가</span>
+          </button>
+        </div>
       </div>
 
       {/* Summary Cards */}

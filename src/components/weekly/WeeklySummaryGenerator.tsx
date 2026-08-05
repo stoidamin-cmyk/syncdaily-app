@@ -111,9 +111,10 @@ export const WeeklySummaryGenerator: React.FC = () => {
       {/* Top Ad Banner */}
       <AdBanner slotPosition="top" />
 
-      {/* Week Navigator */}
-      <div className="glass-panel p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+      {/* Week Navigator Header */}
+      <div className="glass-panel p-4 rounded-2xl grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+        {/* Left: Week Buttons */}
+        <div className="flex items-center gap-2 justify-center md:justify-start w-full">
           <button
             onClick={handlePrevWeek}
             className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
@@ -138,18 +139,18 @@ export const WeeklySummaryGenerator: React.FC = () => {
           </button>
         </div>
 
-        {/* Range Display */}
-        <div className="text-center">
+        {/* Center: Range Display (Perfectly centered) */}
+        <div className="flex items-center justify-center text-center">
           <h2 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center justify-center gap-2">
-            <Calendar className="w-4 h-4 text-emerald-500" />
+            <Calendar className="w-4 h-4 text-emerald-500 shrink-0" />
             <span>
               {refDate.getFullYear()}년 W{weekNum}주차 ({formatKoreanDate(startStr)} ~ {formatKoreanDate(endStr)})
             </span>
           </h2>
         </div>
 
-        {/* Copy Format Selector */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 w-full sm:w-auto justify-center">
+        {/* Right: Copy Format Selector */}
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 justify-center md:justify-end w-full">
           <button
             onClick={() => handleFormatSelect('markdown')}
             className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${
