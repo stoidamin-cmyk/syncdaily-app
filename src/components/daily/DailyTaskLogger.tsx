@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTaskStore } from '../../store/useTaskStore';
 import { TaskItemCard } from './TaskItemCard';
 import { TaskFormModal } from './TaskFormModal';
-import { formatKoreanDate, formatMinutesToText } from '../../utils/dateUtils';
+import { formatKoreanDate, formatMinutesToText, formatDateKey } from '../../utils/dateUtils';
 import type { TaskItem } from '../../types';
 import { AdBanner } from '../ads/AdBanner';
 import {
@@ -19,28 +19,28 @@ import {
 
 export const DailyTaskLogger: React.FC = () => {
   const { tasks } = useTaskStore();
-  const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().slice(0, 10));
+  const [selectedDate, setSelectedDate] = useState(() => formatDateKey(new Date()));
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTagFilter, setSelectedTagFilter] = useState<string | null>(null);
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskItem | null>(null);
 
-  // Navigate dates
+  // Navigate dates (using formatDateKey to prevent timezone offsets)
   const handlePrevDay = () => {
     const d = new Date(selectedDate + 'T00:00:00');
     d.setDate(d.getDate() - 1);
-    setSelectedDate(d.toISOString().slice(0, 10));
+    setSelectedDate(formatDateKey(d));
   };
 
   const handleNextDay = () => {
     const d = new Date(selectedDate + 'T00:00:00');
     d.setDate(d.getDate() + 1);
-    setSelectedDate(d.toISOString().slice(0, 10));
+    setSelectedDate(formatDateKey(d));
   };
 
   const handleToday = () => {
-    setSelectedDate(new Date().toISOString().slice(0, 10));
+    setSelectedDate(formatDateKey(new Date()));
   };
 
   // Filter tasks for selected date

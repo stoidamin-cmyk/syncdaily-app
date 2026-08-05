@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from '../common/Modal';
 import { useTaskStore } from '../../store/useTaskStore';
 import { useSettingsStore } from '../../store/useSettingsStore';
+import { formatDateKey } from '../../utils/dateUtils';
 import type { TaskItem } from '../../types';
 import { Clock, Tag, FileText, CheckCircle2 } from 'lucide-react';
 
@@ -38,7 +39,7 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
       setDescription(taskToEdit.description || '');
       setCompleted(taskToEdit.completed);
     } else {
-      setDate(initialDate || new Date().toISOString().slice(0, 10));
+      setDate(initialDate || formatDateKey(new Date()));
       setTitle('');
       setCategory('개발');
       setCustomTagInput('');
